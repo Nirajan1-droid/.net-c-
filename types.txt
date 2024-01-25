@@ -1,0 +1,29 @@
+statically typed:
+every var has type
+there is the object for each type 
+object inheritance is done while compiling
+
+
+bool
+byte
+sbyte
+realno:
+decimal
+double 
+
+stack are fast access, array of memory
+heap are slower than stack
+
+ changing types from double to int 
+ decimal decimalval = 10;
+ this method of conversion is called explicit conversion
+ int valD = (int)decimalval;
+
+
+finding type 
+(var1 * var2 ).GetType()
+
+value comparision === is not available in C#
+== is availble for value comparision
+
+
