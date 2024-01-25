@@ -1,0 +1,7 @@
+List<T>
+
+var num = new List<int>{1,1};
+var last = num[num.Count];//gives error as it is greater than last index of the array
+//num.Count returns 2 and try to access num[2] which is not present 
+so:
+var last = num[num.Count-1];

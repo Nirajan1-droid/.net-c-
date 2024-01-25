@@ -1,0 +1,60 @@
+constructors:  
+
+finalizers: something which is in control of garbage collector
+
+fields: private, protected scope, private
+
+constants: never change
+
+Properties: mechanisms for ineraction with values in class. 
+
+methods: actions contained on them
+
+Events: notification of other class when something of interest occurs.
+
+Delegates: hold a reference to the methods.
+
+Operators: 
+
+ internal class Student 
+{
+#constructors
+    /* A publicly accessible constructor that doesn't do anything.  
+    
+    This public constructor is created by default by the compiler, and does not need to
+    explicitly be added if no action methods take place during construction
+    */
+    public Student() 
+    { 
+    }
+#properties
+    // Simple publicly accessible properties that define the FirstName, LastName, and Age
+    // of our Student
+    public string FirstName { get; set; }
+#if set is blocked with constant 
+    public string FirstName { get=>"nirajan";  }
+#cannot be set by the object accessors.
+    public string LastName { get; set; }
+    public byte Age { get; set; }
+    public bool IsEnrolled { get; set; }
+    
+}
+#object creation
+// Create a new Student object and assign it to the variable name `s`
+var s = new Student();
+s.FirstName = "Nirajan";
+s.LastName = "Das";
+s.Age = 25;
+s.IsEnrolled = true;
+#printing through jupitor notebook.
+display(s);   // This is NOT a C# or .NET function, but rather a Jupyter notebook feature to display 
+              //the content inside parenthesis ( )
+    
+var fritz = new Student() {
+    FirstName = "Jeff",
+    LastName = "Fritz",
+    Age = 20,
+    IsEnrolled = false
+};
+display(fritz);
+    
