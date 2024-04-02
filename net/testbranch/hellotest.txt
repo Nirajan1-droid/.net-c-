@@ -1,4 +1,3 @@
-mvc codesdsdsdfsdf 3312
 import os
 import shutil
 import git
@@ -17,7 +16,7 @@ def handle_error(func, path, exc_info):
 def modified_within_last_3_hours(file_path):
     file_modified_time = datetime.fromtimestamp(os.path.getmtime(file_path))
     current_time = datetime.now()
-    return current_time - file_modified_time <= timedelta(hours=3)
+    return current_time - file_modified_time <= timedelta(hours=) #kati kati interval ma changes haru hunxa? step
 
 # Function to scan the folder for changed files in the last 3 hours
 def scan_folder_for_changes(folder_path):
@@ -30,8 +29,8 @@ def scan_folder_for_changes(folder_path):
     return changed_files
 
 # Define the repository URL and directory
-repo_url = "https://github.com/Nirajan1-droid/.net-c-.git"
-repo_directory = "C:/Users/Nira/historychecker/repo1"  # Specify your desired directory here
+repo_url = "https://github.com/Nirajan1-droid/.net-c-.git" #kun repo ma merge garne ho? step
+repo_directory = "C:/Users/Nira/historychecker/repo1"  # to concatinate files here! step
 
 # Check if the repo_directory exists, delete it if it does
 if os.path.exists(repo_directory):
@@ -41,7 +40,7 @@ if os.path.exists(repo_directory):
 repo = git.Repo.clone_from(repo_url, repo_directory, branch='main')  # Specify the branch name here
 
 # Check for changes in the 'historychecker/net' directory within the last 3 hours
-net_directory = "C:/Users/Nira/historychecker/net"
+net_directory = "C:/Users/Nira/historychecker/net" #kun file ma changes haru hune garxa? step
 changed_files = scan_folder_for_changes(net_directory)
 
 # Merge changed files with fetched code and push changes as a single commit
