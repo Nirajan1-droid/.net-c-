@@ -1,1 +1,74 @@
 mvc codesdsdsdfsdf 3312
+import os
+import shutil
+import git
+from datetime import datetime, timedelta
+
+# Function to handle deletion errors
+def handle_error(func, path, exc_info):
+    """Handles errors during deletion (e.g., permission issues)."""
+    if os.path.exists(path):
+        os.chmod(path, 0o777)  # Set full permissions (careful!)
+        func(path)  # Retry deletion
+    else:
+        print(f"Error deleting {path}: {exc_info[1]}")
+
+# Function to check if a file was modified within the last 3 hours
+def modified_within_last_3_hours(file_path):
+    file_modified_time = datetime.fromtimestamp(os.path.getmtime(file_path))
+    current_time = datetime.now()
+    return current_time - file_modified_time <= timedelta(hours=3)
+
+# Function to scan the folder for changed files in the last 3 hours
+def scan_folder_for_changes(folder_path):
+    changed_files = []
+    for root, dirs, files in os.walk(folder_path):
+        for file in files:
+            file_path = os.path.join(root, file)
+            if modified_within_last_3_hours(file_path):
+                changed_files.append(file_path)
+    return changed_files
+
+# Define the repository URL and directory
+repo_url = "https://github.com/Nirajan1-droid/.net-c-.git"
+repo_directory = "C:/Users/Nira/historychecker/repo1"  # Specify your desired directory here
+
+# Check if the repo_directory exists, delete it if it does
+if os.path.exists(repo_directory):
+    shutil.rmtree(repo_directory, onerror=handle_error)
+
+# Clone the repository with the 'main' branch
+repo = git.Repo.clone_from(repo_url, repo_directory, branch='main')  # Specify the branch name here
+
+# Check for changes in the 'historychecker/net' directory within the last 3 hours
+net_directory = "C:/Users/Nira/historychecker/net"
+changed_files = scan_folder_for_changes(net_directory)
+
+# Merge changed files with fetched code and push changes as a single commit
+# if changed_files:
+for file_path in changed_files:
+        print(file_path)
+        # Determine the relative path of the file within the net directory
+        index_file = os.path.relpath(file_path, net_directory)
+        index_file_destination = os.path.join(repo.working_dir, index_file)
+
+        # Create the destination directory if it doesn't exist
+        index_file_destination_dir = os.path.dirname(index_file_destination)
+        if not os.path.exists(index_file_destination_dir):
+            os.makedirs(index_file_destination_dir)
+
+        # Copy the file to the repository
+        shutil.copy(file_path, index_file_destination)
+        repo.index.add([index_file])
+
+
+    # Commit all changes with a single commit message
+commit_message = "Added or modified files from the 'historychecker/net' directory"
+repo.index.commit(commit_message)
+
+    # Push the changes to the remote repository
+origin = repo.remote(name='origin')
+origin.push()
+print("Changes pushed to the repository.")
+# else:
+    # print("No changes found in the last 3 hours.")
