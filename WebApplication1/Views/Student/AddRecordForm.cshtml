@@ -1,0 +1,23 @@
+@model WebApplication1.Models.Student;
+@*create form*@
+<style>
+    .field-validation-error
+    {
+        color: red;
+    }
+</style>
+<form asp-controller="Student" asp-action="AddRecordForm" method="post">
+    <label asp-for="Id">Student ID: </label>
+    <input asp-for="Id" /><br /><br />
+    <span asp-validation-for="Id"></span><br /><br />
+
+    <label asp-for="Name">Student ID: </label>
+    <input asp-for="Name" /><br /><br />
+    <span asp-validation-for="Name"></span><br /><br />
+    
+    <label asp-for="Age">Student ID: </label>
+    <input asp-for="Age" /><br /><br />
+    <span asp-validation-for="Age"></span><br /><br />
+
+    <input type="submit" value="Save">
+</form>

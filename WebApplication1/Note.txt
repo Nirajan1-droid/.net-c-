@@ -1,0 +1,62 @@
+ASP.Net Core MVC Topics: 
+
+- Student Controller
+- Student View
+- We can pass data from controller to view(But, it might not be standard?)
+- ViewData Dictionary (Pass data in key value pair)
+- Enable hot reload
+- Using ViewBag object (Convenient to work as it doesn't require casting)
+- Using ViewModel
+
+- Model is the representation of data in the database
+- They are plain classes with properties(Can't put field?) inside it
+- It specifies business specific data
+- Concept of Model Binding
+
+- Model can have a constructor to initialize the model properties
+- @Model is a predfined keyword in Razor that stores the object passed to view
+- We can access the data as @Model.ID, @Model.Name, etc.
+
+- Concept of tag Tag Helper for input form and form validation in View
+- C# tags
+
+- Transfer form data from one page to another
+
+- Model Binding
+- Model Validation: 
+	- Done for correctness of data
+	- It is not recommended to validate data from database directly via Domain Constraint
+	- We need to validate from front-end and back-end
+	- Back-end validation is required because, client-side script(JS) can be disabled and JS script
+	can be inspected from browser
+
+	- In ASP.NET, ModelState is used. It has 'IsValid' property to denote validity
+	- For model validation, we use Attribute infront of required property name in model class
+	- These Attributes are called Validation Attributes. 
+	- Atribute Example: [Required], [EmailAddress], [Phone], [Range(min, max)], [RegularExpression], 
+	[StringLength(n)], [DataType(type)], etc.
+	- These attributes have more properties which can be set like minimum and maximum value for [StringLength]
+
+	- Tags like: asp-validation-summary, asp-validation-for, etc. is used to display the error
+
+
+- IOC: Inversion of Control(It says: Don't call me, we'll call you!)
+	- Passing control to another party for control
+	- Achieved using dependency injection(can be done using built-in IOC Containers)
+	- Used for making loosly coupled system
+	- Loosly coupled system helps for better maintainabiliy
+	- Tightly coupled system
+
+	- Build-in IOC container
+		- AddTransient,
+		- AddScopped,
+		- AddSingleton, etc.
+- Steps for dependency injection: 
+	- Create an interface
+	- Create class that implements the interface
+	- Register the interface and class as service in Program.cs
+	- Take service to the constructor, can be done in any controller's constructor
+
+- Install following tools for working with DB: 
+	- Microsoft SQL Server (SQL Plus?)
+	- SSMS(SQL Server Management Studio)
