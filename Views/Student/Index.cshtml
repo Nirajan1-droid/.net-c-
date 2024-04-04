@@ -5,7 +5,10 @@
 }
 @model WebApplication2.Models.Student;
 <form asp-controller="Student" asp-action="Submit" method="post">
-    
+    <div>
+        <label asp-for="id">Id:</label>
+        <input asp-for="id" />
+    </div>
     <div>
         <label asp-for="Name">Name:</label>
         <input asp-for="Name" />

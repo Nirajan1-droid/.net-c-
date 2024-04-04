@@ -1,11 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication2.Models
 {
-    [Table("Details")]
-    public class Student 
-    { 
-    public string Name { get; set; } 
-  
+
+    [Table("StudentTable")]
+    public class Student
+    {
+
+        [Key]
+        public int id { get; set; } 
+        public string Name { get; set; }
+
     }
 }
