@@ -5,5 +5,5 @@ public class YourDbContext : DbContext
 {
     public YourDbContext(DbContextOptions<YourDbContext> options) : base(options) { }
 
-    public DbSet<Student> Details { get; set; }  // Assuming "Student" matches your class name
+    public DbSet<Student> StudentTables { get; set; }  // Assuming "Student" matches your class name
 }
