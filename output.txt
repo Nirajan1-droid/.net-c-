@@ -1,0 +1,19 @@
+stack result ko value for 1: 110
+stack result ko value for 2: 10
+stack result ko value for 3: 101
+stack result ko value for 4: 220
+stack result ko value for 5: 20
+stack result ko value for 6: 202
+stack result ko value for 7: 330
+stack result ko value for 8: 30
+stack result ko value for 9: 303
+stack result ko value for 10: 440
+stack result ko value for 11: 40
+stack result ko value for 12: 404
+stack result ko value for 13: 550
+stack result ko value for 14: 50
+stack result ko value for 15: 505
+stack result ko value for 16: 660
+stack result ko value for 17: 60
+stack result ko value for 18: 606
+Popping elements off the stack:
