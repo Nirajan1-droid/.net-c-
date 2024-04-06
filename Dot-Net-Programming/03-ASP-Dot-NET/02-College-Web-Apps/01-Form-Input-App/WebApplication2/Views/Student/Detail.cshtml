@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model List<WebApplication2.Models.Student>;
+
+<h2>User Information</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)//model iteself is the list of the item
+        {
+            <tr>
+        <td>@item.id</td>
+        <td>@item.Name</td>
+        <a class="btn" asp-controller="Student" asp-action="Edit" asp-route-id="@item.id">Edit</a>
+                
+        </tr>
+        
+            
+        }
+    </tbody>
+
+</table>
+ 

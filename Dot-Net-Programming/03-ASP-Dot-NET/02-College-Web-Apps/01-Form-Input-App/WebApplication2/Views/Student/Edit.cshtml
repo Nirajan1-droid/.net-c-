@@ -3,3 +3,27 @@
 *@
 @{
 }
+@model WebApplication2.Models.Student;
+@if(Model is null)
+{
+    <p>Model is null bro.</p>
+}
+@if (Model is not null)
+{
+    
+<h1>Edit Details</h1>
+    <form asp-controller="Student"  method="post">
+    <div>
+         <label asp-for="id">Id:</label>
+        <input  asp-for="id" readonly  />
+    </div>
+    <div>
+        <label asp-for="Name">Name:</label>
+        <input type="text" asp-for="Name" />
+    </div>
+    
+        <button type="submit" asp-action="Edit" >Submit</button>
+        <button type="submit"  asp-action="Delete">Delete</button>
+</form>
+
+}
