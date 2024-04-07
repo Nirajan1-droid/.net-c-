@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication2.Models;
-using WebApplication2.Hubs;
+using WebApplication2.Hubs;//configuration part 1
 internal class Program
 {
     public static void Main(string[] args)
@@ -17,7 +17,7 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        builder.Services.AddSignalR();
+        builder.Services.AddSignalR();//configuration part 1
 
         builder.Services.AddControllersWithViews();
         builder.Services.AddDbContext<YourDbContext>(options => options.UseSqlServer(
@@ -49,6 +49,7 @@ internal class Program
         app.UseRouting();
 
         app.UseAuthorization();
+        //app.MapRazorPages();
 
         app.MapControllerRoute(
             name: "default",
@@ -58,7 +59,8 @@ internal class Program
             pattern: "Students/{action=Index}",
             defaults: new { controller = "Student" });
 
-        app.MapHub<ChatHub>(pattern:"/Chat");
+        //app.MapHub<ChatHub>(pattern:"/Chat");
+        app.MapHub<ChatHub>("/chatHub");//configuration part 1
         app.Run();
     }
 }

@@ -9,19 +9,23 @@ namespace WebApplication2.Hubs
 
     public class ChatHub :Hub
     {
-        public async Task JoinChat(UserConnection connection)
+        public async Task SendMessage(string user, string message)
         {
-            await Clients.All.SendAsync(method: "Recieved Message", 
-                arg1: "admin", arg2: $"{connection.UserName} has joined");
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
+        //public async Task JoinChat(UserConnection connection)
+        //{
+        //    await Clients.All.SendAsync(method: "Recieved Message", 
+        //        arg1: "admin", arg2: $"{connection.UserName} has joined");
 
-        }
-        public async Task JoinSpecificChatRoom(UserConnection connection)
-        {
-            await Groups.AddToGroupAsync(Context.ConnectionId, 
-                groupName: connection.chatRoom);
-            await Clients.Group(connection.chatRoom).
-                SendAsync(method: "recieveMessage", arg1: "admin", 
-                arg2: $"{connection.UserName} has joined ${connection.chatRoom}");
-        }
+        //}
+        //public async Task JoinSpecificChatRoom(UserConnection connection)
+        //{
+        //    await Groups.AddToGroupAsync(Context.ConnectionId, 
+        //        groupName: connection.chatRoom);
+        //    await Clients.Group(connection.chatRoom).
+        //        SendAsync(method: "recieveMessage", arg1: "admin", 
+        //        arg2: $"{connection.UserName} has joined ${connection.chatRoom}");
+        //}
     }
 }
