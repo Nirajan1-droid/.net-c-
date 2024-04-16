@@ -1,0 +1,18 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+ 
+
+@model WebApplication_Form__Nirajan.Models.Student
+<form asp-controller="Student" asp-action="Submit" method="post">
+    <div>
+        <label asp-for="id">Id:</label>
+        <input asp-for="id" />
+    </div>
+    <div>
+        <label asp-for="Name">Name:</label>
+        <input asp-for="Name" />
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
