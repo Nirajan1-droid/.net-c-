@@ -1,0 +1,137 @@
+#CIL
+
+cil is still extremly interseting intellectual pursuit.
+more understanding the grammer of CIL, the better we will be able to move into the relam of advanced .net 
+deveopment.
+
+
+```
+```
+
+there are some scenarios that we might need to modify the CIL to interoperate with some advanced COM
+features.
+building dynamic assemblies using the System.Reflection.Emit namespace. this api allows us to generate an in-memory .net assembly. which can optionally be persisted to disk.
+
+Modification of the assemblies at runtime.
+
+
+#system.reflection.emit
+
+this namespace provides classes that enable the creation of dynamic methods , types and assemblies. the key classes involved in this process are:
+
+    AssemblyBuilder
+    ModuleBuilder
+    TypeBuilder
+    MethodBuilder
+    ILGenerator
+
+    the above are the classes that are present in the system.reflection.emit namespace.
+
+    these classes work together to define and emit the intermediate language code that makes up the assembly.
+
+    steps to build a dynamic assembly:
+
+    #1. Define the Assembly:The first step is to create AssemblyBuilder instance which represents the dynamic assembly. this can be done using the AppDomain (NET framework ) or AssemblyBuilder.DefineDynamicAssembly*(in NET core)
+
+```
+AssemblyName assemblyName = new AssemblyName("DynamicAssemblyExample");
+AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
+ ```
+
+ AssemblyBuilderAccess.RunAndSave specifies that the assembly can be run and optionally saved to disk
+
+ #2 . Define a module:
+
+ create  a ModuleBuilder within the assembly. A module is a logical division of the assembly.
+
+ ``` 
+ 
+ ```
+
+ ```
+ using System;
+using System.Reflection;
+using System.Reflection.Emit;
+
+class Program
+{
+    static void Main()
+    {
+        // Define the assembly
+        AssemblyName assemblyName = new AssemblyName("DynamicAssemblyExample");
+        
+        // the name of the assembly will be dynamicassembly example
+
+        //.. assembly builder instance represents the dynamic assembly.
+        //AssemblyBuilder is the class and DefineDynamicAssembly is the static method to create a new dynamic assembly in the current application domain.
+
+        // it takes two parameter  assembly name and the assemblyBuilderAccess mode.
+        //here the mode is , RunAndSave
+
+        AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.RunAndSave);
+
+        // Define a module
+
+        //we are using the ModuleBuilder Class to  create a new module and another parameter for the DefineDynamicModule method is that , the destination where the module will be saved.
+
+        ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("MainModule", "DynamicAssemblyExample.dll");
+
+        // Define a type and after defining it we have to close it with createType()
+        //after performing IL emmissions inside that .
+
+        //we are creating  a new class inside that module.which is DynamicClass 
+        //TypeBuilder allows for the defination of the class structure, including its methods , fields and properties.
+        //public is the access modifier in TypeAttribute mode.
+        TypeBuilder typeBuilder = moduleBuilder.DefineType("DynamicClass", TypeAttributes.Public);
+
+        // Define a method
+        //we are creating a new method inside that DynamicClass class, by using typeBuilder which has the instance of the class .
+        // the new method to be created inside that Class is done by DefineMethod method of the typeBuilder class.
+        //the new method is DynamicMethod, and MethodAttributes specifies the access modifier to be publivc type and the it  returns void and there are no any types to define in the method.
+
+        MethodBuilder methodBuilder = typeBuilder.DefineMethod("DynamicMethod", MethodAttributes.Public, typeof(void), Type.EmptyTypes);
+        //ILGenerator is obtained to emit the actual  iL code for the method.
+
+        //iLGenerator uses that method which we just build and applies GetILGenerator method. this method is used to emit intermediate language instruction into a method body.
+        ILGenerator ilGenerator = methodBuilder.GetILGenerator();
+        ilGenerator now contains object of ILGenerator class, where we  can implement GetILGenerator() method , 
+        
+        which allows IL instructions to be emitted into the method body. 
+
+        
+        // Emit IL code 
+
+        // OpCodes.Ldstr loads the string literal onto the evaluation stack.
+        ilGenerator.Emit(OpCodes.Ldstr, "Hello, World!");
+
+        //this generates some value, as we are calling writeline method using the console type, and that vlaue then returned to the caller from the method using OpCodes.Ret.
+
+
+        ilGenerator.Emit(OpCodes.Call, typeof(Console).GetMethod("WriteLine", new Type[] { typeof(string) }));
+        
+        ilGenerator.Emit(OpCodes.Ret);
+
+
+
+        // Create the type
+        Type dynamicType = typeBuilder.CreateType();
+      // creating a type using typeBuilder is a critical step in process of defining types within a NET assembly using the namespace ...reflection.emit.
+
+      //we are creating a blueprint for a class or interface, this blueprint specifies the structure of the type including its fields , properties , methods and other members.
+
+      //calling createType() on the TypeBuilder finalizes the type defination based on the blueprint.
+
+
+        //then the dll is being saved.
+        // Save the assembly
+        assemblyBuilder.Save("DynamicAssemblyExample.dll");
+
+        
+
+        // Use the dynamic type
+        object dynamicInstance = Activator.CreateInstance(dynamicType);
+        dynamicType.GetMethod("DynamicMethod").Invoke(dynamicInstance, null);
+    }
+}
+
+ ```

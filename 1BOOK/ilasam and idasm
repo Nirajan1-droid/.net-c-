@@ -1,0 +1,33 @@
+#IL disassembler (ildasm.exe)"
+
+ildasm.exe is a tool that disassembles a NET assembly and shows its intermediate lanugage code
+this can be used for inspecting the internal structure of an assembly , including the types , methods and 
+their IL code.
+
+key features:
+disassembly: converts the compiled binary format of .NET assembly into human readable IL code.
+inspection : allows developers to inspect the metadata and IL code of an assembly which can help with debugging , learning or reverse engineering.
+
+GUI: ildasm.exe comes with a graphical user interface that provides a tree view of the assembly structrure  making it easier navigate through namespaces , types and members.
+
+to disassemb;e a .net assembly named myassembly.dll :
+
+```
+ildasm myassembly.dll
+
+```
+
+IL Assembler is a  tool that assembles IL code into .net assembly. this is the reverse operation of ildasm.exe it takes il code and generates  a dll or exe file that can be executed by the .net runtime.
+
+assembly: converts IL code and metadata into  a compiled .NET assembly.
+creation : allows developers to write IL code directly and create assemblies from it. which can be usedful for low level porgramming , optimizations or compiler development.
+
+customization: supports various options for customizing the assembly process such as specifying the output file type and including debug infromation..
+
+            ```
+            ilasm myassembly.il /dll
+            ```
+
+            this command creates a myassembly.dll file from IL code container in myassembly.il
+
+

@@ -1,0 +1,42 @@
+.dll single assembly
+
+AMBIGUITY WHILE ACCESSING THE CLASS :
+628
+If you update the top-level statements as shown next, you are issued several compile-time errors,
+because both namespaces define identically named classes:
+
+
+// Ambiguities abound!
+using CustomNamespaces.MyShapes;
+using CustomNamespaces.My3DShapes;
+
+// Which namespace do I reference?
+
+Hexagon h = new Hexagon(); // Compiler error!
+Circle c = new Circle(); // Compiler error!
+Square s = new Square(); // Compiler error!
+The ambiguity can be resolved using the type’s fully qualified name, like so:
+
+#Resolving ambiguity:
+
+// We have now resolved the ambiguity.
+CustomNamespaces.My3DShapes.Hexagon h = new CustomNamespaces.My3DShapes.Hexagon();
+CustomNamespaces.My3DShapes.Circle c = new CustomNamespaces.My3DShapes.Circle();
+CustomNamespaces.MyShapes.Square s = new CustomNamespaces.MyShapes.Square();
+
+#dll versioning:
+Versioning: Assemblies have a four-part version number (major.minor.build.revision).
+This versioning system allows multiple versions of the same assembly to coexist on a single machine.
+
+#structure of assembly (.dll)
+
+ 
+
+ .NET assembly (.dll or .exe) consists of the following elements:
+
+    Operating System File Header: Provides information for the operating system.
+    CLR File Header: Contains data for the Common Language Runtime (CLR).
+    CIL Code: The compiled code in Common Intermediate Language (CIL).
+    Type Metadata: Describes each type's composition within the assembly.
+    Assembly Manifest: Metadata about the assembly itself, including version information and dependencies.
+    Optional Embedded Resources: Additional files included within the assembly.

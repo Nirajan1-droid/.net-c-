@@ -1,0 +1,58 @@
+component object model
+
+allows for the creation and use of binary software component that can interact across different
+programming languages and environments. COM is foundational to many windows technologies.
+
+com can be written in c++, C# ,VB and other languages.
+
+binary  standard
+
+com defines a binary standard for component interaction meaning that component adhere to a specific memory
+layout and calling conventions. this allows for interoperability between components compoiled with different compilers and languages
+
+object oriented programming.
+
+com supports the principle of oop such as encapsulation inheritance  and polymorphism. components can expost objects with properties, methods and events.
+
+interface based programming;
+com relies heavily on interfaces.an interface is a contract that defines the rules to follow.
+
+supports communation between different components inter process communication.
+this is facilated by technlogies like DCOM (Distributed COM)  which extends COM capabilites to  a networked environment.
+
+COM components are registered in windows registy which allows clients to discover and instantiate them. the registry hold s information about the compoent class identifer(CLSID) its location and the interfaces it implements.
+
+com supports versioning to ensure that new version of a componetn can coexist with older versions without breaking existing aopplication interfaces are immutable once published. and new functionality is added via new interfaces.
+
+com has a standardized way of handling erros through HRESLT codes.
+method return these codes to indicate success or failures and client can check these results and handle erros approperiately.
+HRESULT  cod example:
+0x000000000000000 = operation successful
+0x0000000000001 = operation sucessful but with a result this is not true or has additional implications.
+
+0x900004005 : unspecified failure.
+    E_INVALIDARG (0x80070057): One or more arguments are invalid.
+    E_OUTOFMEMORY (0x8007000E): Failed to allocate necessary memory.
+    E_NOTIMPL (0x80004001): Not implemented.
+    E_NOINTERFACE (0x80004002): No such interface supported.
+    E_POINTER (0x80004003): Pointer that is not valid.
+    E_HANDLE (0x80070006): Handle that is not valid.
+    E_ABORT (0x80004004): Operation aborted.
+    E_ACCESSDENIED (0x80070005): General access denied error.
+
+Facility Codes
+
+Some common facility codes include:
+
+    FACILITY_NULL (0): Generally indicates a system or general error.
+    FACILITY_RPC (1): Errors originating from remote procedure calls.
+    FACILITY_DISPATCH (2): Errors from IDispatch interface (Automation).
+    FACILITY_STORAGE (3): Errors related to structured storage.
+    FACILITY_ITF (4): Interface-specific errors.
+    FACILITY_WIN32 (7): Errors mapped from Win32 system errors.
+    FACILITY_WINDOWS (8): Errors originating from Windows subsystems
+
+
+automation : 
+com supports automation which allows applicaitons to expose their functionality to scripting languages like VBscript and Jscript. this is widely used in application like microsoft office where external scripts can control and interact with office applications.
+
